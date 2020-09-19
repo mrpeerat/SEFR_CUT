@@ -14,6 +14,8 @@ requirements = [
     'python-crfsuite',
     'pyahocorasick'
 ]
+with open('README.md', 'r', encoding='utf-8-sig') as f:
+    readme = f.read()
 
 setup(
     name = 'SEFR_CUT',
@@ -21,11 +23,13 @@ setup(
     include_package_data = True,
     version = '0.1dev0',
     install_requires = requirements,
+    long_description = readme,
+    long_description_content_type='text/markdown',
     license = 'MIT',
     description = '',
     author = '',
     author_email = '',
-    url = '',
+    url = 'https://github.com/mrpeerat/SEFR_CUT',
     download_url = '',
     keywords = ['thai word segmentation deep learning neural network development'],
     classifiers = [
