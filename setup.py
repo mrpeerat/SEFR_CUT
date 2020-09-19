@@ -11,7 +11,7 @@ requirements = [
     'scipy',
     'numpy',
     'scikit-learn',
-    'pycrfsuite',
+    'python-crfsuite',
     'pyahocorasick'
 ]
 
