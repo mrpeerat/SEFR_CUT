@@ -72,7 +72,7 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
             result[i][idx] = int(y_pred_crf[0])
     return result
 
-def cut(y_pred_boolean,x_data):
+def cut(y_pred_boolean,x_data): #tontan's function
     x_ = x_data[:]
     answer = []
     for idx,items in enumerate(y_pred_boolean):
@@ -86,7 +86,8 @@ def cut(y_pred_boolean,x_data):
 
 def predict(sent,k):
     '''
-
+    sent : Text input ex. ['Hi my name is ping','I love Thailand'] 
+    k : Top-k value 
     '''
     if 'tl-deepcut' in engine_mode:
         y_pred=[]
@@ -95,25 +96,26 @@ def predict(sent,k):
         y_pred = list(map(prepro.argmax_function,y_pred_))
         x_answer = cut(y_pred,sent)
     else:
-        y_original,y_entropy_original,y_prob_original,_,_,_,_ = prepro.predict_(sent,og='true') # DeepCut Baseline/BEST+WS/WS
+        y_pred,y_entropy,y_prob = prepro.predict_(sent) # DeepCut Baseline/BEST+WS/WS
         if engine_mode == 'deepcut':
-            x_answer = cut(y_original,sent)
+            x_answer = cut(y_pred,sent)
         else:
-            entropy_index = [return_max_index(k,value) for value in y_entropy_original] # Find entropy index from DC Baseline
-            answer_ds_original = scoring_function(sent,y_original,y_entropy_original,y_prob_original,entropy_index) # Score function
+            entropy_index = [return_max_index(k,value) for value in y_entropy] # Find entropy index from DC Baseline
+            answer_ds_original = scoring_function(sent,y_pred,y_entropy,y_prob,entropy_index) # Score function
             x_answer = cut(answer_ds_original,sent)
     return [x_text.split('|')[1:] for x_text in x_answer]
 
-def tokenize(sent,k=1):
+def tokenize(sent,k=0):
     if type(sent) != list:
         sent = [sent]
-
-    if k == 1:
-        if engine_mode == 'lst20':
+ 
+    if k == 0:
+        if engine_mode == 'lst20': # not available
             k =  30
         elif engine_mode == 'tnhc':
             k =  36
         else: #ws
             k = 100 #27
+    
     ans = map(predict,[sent],np.full(np.array(sent).shape, k))
     return list(ans)[0]

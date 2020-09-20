@@ -161,61 +161,19 @@ class preprocess:
             y_entropy = map(self.find_entropy,normalizae_data) #Random = False
         return list(y_entropy)
 
-    def predict_(self,x,og='false',new_bl='false',ws='false'):
+    def predict_(self,x):
         x_char,x_type = self.create_feature_array(x)
         
         y_original=[]
         y_entropy_original=[]
-        y_pred=[]
-        y_entropy=[]
-        y_ws=[]
-        y_entropy_ws=[]
         y_original_prob=[]
-        if new_bl == 'true':
-            y_pred = []
-            for idx,item in enumerate(x):
-                char_,type_ = self.create_feature_array(item)
-                try:
-                    ans = self.deepcut_new_baseline_model.predict([char_, type_])
-                    y_pred.append(ans)
-                except:
-                    print(f'Error:{item} idx:{idx}')
-            y_pred = self.preprocessing_y_pred(y_pred)
-            y_norm = list(map(self.normalization,y_pred))
-            y_entropy = self.change_to_entropy(y_norm)
-            y_pred = list(map(self.argmax_function,y_pred))
-            
-        if og == 'true':
-            y_original_prob = list(map(self.pred,x))
-            y_original_prepro = self.preprocessing_original(y_original_prob)
-            y_norm_original = list(map(self.normalization,y_original_prepro))
-            y_entropy_original = self.change_to_entropy(y_norm_original)
-            y_original = list(map(self.argmax_function,y_original_prepro))
-        if ws == 'true':
-            y_ws = []
-            for item in x:
-                char_,type_ = self.create_feature_array(item)
-                try:
-                    ans = self.deepcut_WS_model.predict([char_, type_])
-                    y_ws.append(ans)
-                except:
-                    print(f'Error:{item} idx:{idx}')
-            y_ws = self.preprocessing_y_pred(y_ws)
-            y_norm = list(map(self.normalization,y_ws))
-            y_entropy_ws = self.change_to_entropy(y_norm)
-            y_ws = list(map(self.argmax_function,y_ws))
+        
+        y_original_prob = list(map(self.pred,x))
+        y_original_prepro = self.preprocessing_original(y_original_prob)
+        y_norm_original = list(map(self.normalization,y_original_prepro))
+        y_entropy_original = self.change_to_entropy(y_norm_original)
+        y_original = list(map(self.argmax_function,y_original_prepro))
 
-        return y_original,y_entropy_original,y_original_prob,y_pred,y_entropy,y_ws,y_entropy_ws 
-        #return y_original,y_entropy_original 
+        #return y_original,y_entropy_original,y_original_prob,y_pred,y_entropy,y_ws,y_entropy_ws 
+        return y_original,y_entropy_original,y_original_prob
         ############################################
-        
-
-
-#         y_pred = list(map(self.pred,x))
-#         y_pred = self.preprocessing_original(y_pred)
-#         y_norm = list(map(self.normalization,y_pred))
-#         y_entropy = self.change_to_entropy(y_norm)
-#         y_pred = list(map(self.argmax_function,y_pred))
-        
-        
-#         return y_pred,y_entropy                                   
