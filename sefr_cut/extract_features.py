@@ -7,8 +7,11 @@ from tensorflow.keras.layers import TimeDistributed
 from tensorflow.keras.optimizers import Adam
 import ahocorasick
 from urllib.request import urlopen
-f = open('variable/words_modified.txt')
-dict_ = f.read().strip().split('\n')
+import os
+PATH = os.path.dirname(__file__)
+
+with open(os.path.join(PATH, 'variable','words_modified.txt'),'r',encoding='utf-8-sig') as f:
+    dict_ = f.read().strip().split('\n')
 
 A = ahocorasick.Automaton()
 for idx, word in enumerate(dict_):
