@@ -25,6 +25,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+seft_cut/weight/model_weight.h5
 
 # PyInstaller
 # Usually these files are written by a python script from a template

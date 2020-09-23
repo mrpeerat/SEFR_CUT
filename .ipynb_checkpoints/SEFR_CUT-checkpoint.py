@@ -1,19 +1,13 @@
-# -*- coding: utf-8 -*-
 import warnings
 warnings.filterwarnings('ignore')
 import numpy as np
 import copy as cp
 import operator
-from .preprocessing import preprocess #Our class
+from preprocessing import preprocess #Our class
 prepro = preprocess()
-from .extract_features import extract_features_crf, get_convo_nn2
+import extract_features
 import pycrfsuite
-import math
-import os
-PATH = os.path.dirname(__file__)
-
-def get_path(*path):
-    return os.path.join(PATH,*path)
+import math 
 
 
 def load_model(engine='ws1000'):
@@ -24,14 +18,14 @@ def load_model(engine='ws1000'):
     if engine != 'deepcut':
         if 'tl-deepcut' in engine:
             try:
-                model_load = get_convo_nn2()
+                model_load = extract_features.get_convo_nn2()
                 engine_type = engine.split('-')[2]
-                model_load.load_weights(get_path('weight','model_weight_{engine_type}.h5'))
+                model_load.load_weights(f'weight/model_weight_{engine_type}.h5')
             except:
                 raise Exception('Error Engine TL-XXXX-CORPUS_NAME')  
         else: 
             model_load = pycrfsuite.Tagger() 
-            model_load.open(get_path('model','crf_{engine}_entropyfrom_dc_bl_full_socialDict.model'))
+            model_load.open(f'model/crf_{engine}_entropyfrom_dc_bl_full_socialDict.model')
         global model; model = model_load
     else:
         pass
@@ -66,7 +60,7 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
     del y_dg_pred
 
     for i,items in enumerate(entropy_index):
-        x_data = extract_features_crf(x_function[i],i,y_entropy_function,y_prob_function)
+        x_data = extract_features.extract_features_crf(x_function[i],i,y_entropy_function,y_prob_function)
         for idx in items:
             y_pred_crf = model.tag(x_data[idx])
             result[i][idx] = int(y_pred_crf[0])
