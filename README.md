@@ -6,23 +6,23 @@ DeepCut version (for AttaCut version [here](.........))
 
 > pip install sefr_cut
 
-How To use
+## How To use
 - Requirement
 - Engine
 
-Example
+## Example
 - .........
 
-Performance
+## Performance
 - .........
 
-How to re-train?
+## How to re-train?
 - .....
 
-Result from Paper
+## Result from Paper
 - ...
 
-Citation
+## Citation
 - ......
 
 Thank you many code from
