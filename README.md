@@ -19,9 +19,6 @@ DeepCut version (for AttaCut version [here](.........))
 ## How to re-train?
 - .....
 
-## Result from Paper
-- ...
-
 ## Citation
 - ......
 
