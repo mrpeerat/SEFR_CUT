@@ -7,8 +7,12 @@ DeepCut version (for AttaCut version [here](.........))
 > pip install sefr_cut
 
 ## How To use
-- Requirement
-- Engine
+### Requirements
+- .................
+- .................
+### Engine Mode
+- ws1000
+- .......
 
 ## Example
 - .........
