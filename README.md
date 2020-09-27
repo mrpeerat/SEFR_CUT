@@ -1,11 +1,20 @@
 # SEFR CUT
+Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble
+DeepCut version (for AttaCut version [here](.........))
 
 ## Install
 
 > pip install sefr_cut
 
 How To use
-- .....
+- Requirement
+- Engine
+
+Example
+- .........
+
+Performance
+- .........
 
 How to re-train?
 - .....
@@ -13,7 +22,7 @@ How to re-train?
 Result from Paper
 - ...
 
-Cite
+Citation
 - ......
 
 Thank you many code from
