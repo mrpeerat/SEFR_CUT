@@ -63,6 +63,9 @@ You can play the example on [SEFR Example notebook](.....)
   [['สวัสดี', 'ประเทศ', 'ไทย'], ['ลุง', 'ตู่', 'สู้', 'ๆ']]
   ```
 
+## Evaluation
+................................................
+
 ## Performance
 <img src="https://user-images.githubusercontent.com/21156980/94403460-aa131980-0197-11eb-9a68-8e2927a5059d.PNG" width="569" height="420" />
 <img src="https://user-images.githubusercontent.com/21156980/94404121-ac29a800-0198-11eb-9ce5-898d2e4e6a82.PNG" width="569" height="420" />
