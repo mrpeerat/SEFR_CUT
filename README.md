@@ -13,7 +13,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
 - pyahocorasick == 1.4.0
 
 ## Example
-You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebook) 
+You can play the example on [SEFR Example notebook](.....)
 ### Load Engine & Engine Mode
 - ws1000, tnhc
   - ws1000: Model trained on Wisesight-1000 and test on Wisesight-160
@@ -66,14 +66,14 @@ You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/mas
 <img src="https://user-images.githubusercontent.com/21156980/94404126-ae8c0200-0198-11eb-9151-6adad36cfa31.PNG" width="569" height="341" />
 
 ## How to re-train?
-- .....
+- You can re-train model in folder [Notebooks](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebook) in 1 File and show the example in 1 File !!
 
 ## Citation
-- ......
+- Wait our paper shown in ACL Anthology
 
 Thank you many code from
 
-- [Deepcut](https://github.com/rkcosmos/deepcut) (Baseline Model) : We used 30% code from Deepcut
-- [@bact](https://github.com/bact) (CRF training code) : We used 10% from crf_wordseg https://github.com/bact/nlp-thai
+- [Deepcut](https://github.com/rkcosmos/deepcut) (Baseline Model) : We used some of code from Deepcut to perform transfer learning 
+- [@bact](https://github.com/bact) (CRF training code) : We used some from https://github.com/bact/nlp-thai in training CRF Model
 
 
