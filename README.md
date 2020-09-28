@@ -1,5 +1,6 @@
 # SEFR CUT
 Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble (EMNLP 2020) <br>
+Peerat Limkonchotiwat, Raheem Sawar, Wannaphong Phatthiyaphaibun, Ekapol Chuangsuwanich, Sarana Nutanong <br>
 CRF as Stacked Model and DeepCut as Baseline model<br>
 
 ## Read more:
