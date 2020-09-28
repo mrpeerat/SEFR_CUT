@@ -19,8 +19,9 @@ with open('README.md', 'r', encoding='utf-8-sig') as f:
 
 setup(
     name = 'SEFR_CUT',
-    packages = ['sefr_cut'],
+    packages = ['sefr_cut','sefr_cut.deepcut','sefr_cut.model','sefr_cut.variable','sefr_cut.weight','sefr_cut.deepcut.weight'],
     include_package_data = True,
+    package_data={"sefr_cut": ['model/*','variable/*','weight/*','deepcut/weight/*']},
     version = '0.1dev0',
     install_requires = requirements,
     long_description = readme,
