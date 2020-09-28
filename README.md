@@ -76,7 +76,7 @@ You can play the example on [SEFR Example notebook](https://github.com/mrpeerat/
 <img src="https://user-images.githubusercontent.com/21156980/94404126-ae8c0200-0198-11eb-9151-6adad36cfa31.PNG" width="569" height="341" />
 
 ## How to re-train?
-- You can re-train model in folder [Notebooks](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebooks) We provided every for you!!
+- You can re-train model in folder [Notebooks](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebooks) We provided everything for you!!
   ### Re-train Model
   - You need to XXXXXXXXXXX
   - Link:[HERE](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/2.Train_DS_model.ipynb)
