@@ -64,7 +64,11 @@ You can play the example on [SEFR Example notebook](.....)
   ```
 
 ## Evaluation
-................................................
+- Character & Word Evaluation is provided by call fuction ```evaluation()```
+  - For example
+  ```
+  
+  ```
 
 ## Performance
 <img src="https://user-images.githubusercontent.com/21156980/94403460-aa131980-0197-11eb-9a68-8e2927a5059d.PNG" width="569" height="420" />
