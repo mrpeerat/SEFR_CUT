@@ -62,7 +62,7 @@ You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/mas
 ## Performance
 <img src="https://user-images.githubusercontent.com/21156980/94403460-aa131980-0197-11eb-9a68-8e2927a5059d.PNG" width="569" height="420" />
 <img src="https://user-images.githubusercontent.com/21156980/94404121-ac29a800-0198-11eb-9ce5-898d2e4e6a82.PNG" width="569" height="420" />
-<img src="https://user-images.githubusercontent.com/21156980/94404126-ae8c0200-0198-11eb-9151-6adad36cfa31.PNG" width="569" height="420" />
+<img src="https://user-images.githubusercontent.com/21156980/94404126-ae8c0200-0198-11eb-9151-6adad36cfa31.PNG" width="569" height="341" />
 ## How to re-train?
 - .....
 
