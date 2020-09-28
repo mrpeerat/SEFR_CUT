@@ -27,11 +27,11 @@ setup(
     long_description_content_type='text/markdown',
     license = 'MIT',
     description = '',
-    author = '',
-    author_email = '',
+    author = 'mrpeerat',
+    author_email = 'peerat.l_s19@vistec.ac.th',
     url = 'https://github.com/mrpeerat/SEFR_CUT',
     download_url = '',
-    keywords = ['thai word segmentation deep learning neural network development'],
+    keywords = ['thai word segmentation deep learning machine learning neural network development'],
     classifiers = [
         'Development Status :: 3 - Alpha'
     ],
