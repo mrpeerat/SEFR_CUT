@@ -26,12 +26,15 @@ def load_model(engine='ws1000'):
             try:
                 model_load = get_convo_nn2()
                 engine_type = engine.split('-')[2]
-                model_load.load_weights(get_path('weight','model_weight_{engine_type}.h5'))
+                model_load.load_weights(get_path('weight',f'model_weight_{engine_type}.h5'))
             except:
                 raise Exception('Error Engine TL-XXXX-CORPUS_NAME')  
         else: 
-            model_load = pycrfsuite.Tagger() 
-            model_load.open(get_path('model','crf_{engine}_entropyfrom_dc_bl_full_socialDict.model'))
+            try:
+                model_load = pycrfsuite.Tagger() 
+                model_load.open(get_path('model',f'crf_{engine}_entropyfrom_dc_bl_full_socialDict.model'))
+            except:
+                raise Exception(f'Engine available: ws1000,tnhc,best. {engine} is not available!')
         global model; model = model_load
     else:
         pass
@@ -43,6 +46,9 @@ def return_max_index(number_ranking,entropy_list):
     Sentence by Sentence
     number_ranking : top-k percentile value (int 1-100)
     entropy_list : Entropy of each character ex. [0.5,0.1,0.4,0.3,0.1]
+    
+    Return
+    
     '''
     index_entropy = []
     func_entro_list = entropy_list[:]
@@ -61,6 +67,9 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
     y_entropy_function: Entropy of each character ex. [0.5,0.1,0.4,0.3,0.1]
     y_entropy_function: Probability of each character ex. [0.5,0.1,0.4,0.3,0.1]
     entropy_index: Index of highest entropy in top-k ex. [13,7,3,1,9]
+    
+    Return
+    
     '''
     result = y_dg_pred[:]
     del y_dg_pred
@@ -73,6 +82,12 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
     return result
 
 def cut(y_pred_boolean,x_data): #tontan's function
+    '''
+    Input
+    
+    Return
+    
+    '''
     x_ = x_data[:]
     answer = []
     for idx,items in enumerate(y_pred_boolean):
@@ -88,6 +103,9 @@ def predict(sent,k):
     '''
     sent : Text input ex. ['Hi my name is ping','I love Thailand'] 
     k : Top-k value 
+    
+    Return
+    
     '''
     if 'tl-deepcut' in engine_mode:
         y_pred=[]
@@ -103,19 +121,29 @@ def predict(sent,k):
             entropy_index = [return_max_index(k,value) for value in y_entropy] # Find entropy index from DC Baseline
             answer_ds_original = scoring_function(sent,y_pred,y_entropy,y_prob,entropy_index) # Score function
             x_answer = cut(answer_ds_original,sent)
-    return [x_text.split('|')[1:] for x_text in x_answer]
+    answer = x_answer[0].split('|')
+    if answer[0] == '':
+        return answer[1:]
+    else:
+        return answer
 
 def tokenize(sent,k=0):
+    '''
+    Input
+    
+    Return
+    
+    '''
     if type(sent) != list:
         sent = [sent]
  
     if k == 0:
-        if engine_mode == 'lst20': # not available
-            k =  30
+        if engine_mode == 'best': 
+            k =  5
         elif engine_mode == 'tnhc':
             k =  36
         else: #ws
-            k = 100 #27
+            k = 100 
     
     ans = map(predict,[sent],np.full(np.array(sent).shape, k))
     return list(ans)[0]
