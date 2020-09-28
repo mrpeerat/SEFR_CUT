@@ -7,6 +7,8 @@ import operator
 from .preprocessing import preprocess #Our class
 prepro = preprocess()
 from .extract_features import extract_features_crf, get_convo_nn2
+from sklearn.metrics import precision_recall_fscore_support
+from itertools import accumulate
 import pycrfsuite
 import math
 import os
@@ -48,7 +50,7 @@ def return_max_index(number_ranking,entropy_list):
     entropy_list : Entropy of each character ex. [0.5,0.1,0.4,0.3,0.1]
     
     Return
-    
+    index_entropy : list of character index sorted by ASC ex. [7,5,1,9,1] 
     '''
     index_entropy = []
     func_entro_list = entropy_list[:]
@@ -69,7 +71,7 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
     entropy_index: Index of highest entropy in top-k ex. [13,7,3,1,9]
     
     Return
-    
+    result : same size and len() as y_dg_pred but the answer is changed by CRF
     '''
     result = y_dg_pred[:]
     del y_dg_pred
@@ -83,10 +85,10 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
 
 def cut(y_pred_boolean,x_data): #tontan's function
     '''
-    Input
-    
+    y_pred_boolean: list of answer in boolean from (0 or 1) ex. [1,0,0,1,0,0]
+    x_data : list of text, size need be the same as y_pred_boolean ex. [ฉันรัก]
     Return
-    
+    answer : list of text but boundary is made ex. ex. [ฉัน|รัก]
     '''
     x_ = x_data[:]
     answer = []
@@ -105,7 +107,7 @@ def predict(sent,k):
     k : Top-k value 
     
     Return
-    
+    answer : boolean list ex. [1,0,0,1,0,0]
     '''
     if 'tl-deepcut' in engine_mode:
         y_pred=[]
@@ -129,10 +131,10 @@ def predict(sent,k):
 
 def tokenize(sent,k=0):
     '''
-    Input
-    
+    sent: sentence as a input to model
+
     Return
-    
+    ans: list of text with boundary
     '''
     if type(sent) != list:
         sent = [sent]
@@ -147,3 +149,43 @@ def tokenize(sent,k=0):
     
     ans = map(predict,[sent],np.full(np.array(sent).shape, k))
     return list(ans)[0]
+
+def char_eval_function(y_true,y_pred): 
+    f1_score_entropy=[]
+    for index,_ in enumerate(y_pred):
+        _, _, fscore, _ = precision_recall_fscore_support(y_true[index], y_pred[index], average='binary')
+        f1_score_entropy.append(fscore)
+    return f1_score_entropy 
+
+def word_eval_function(train : list, test: list) -> tuple:
+    train_acc = list(accumulate(map(len, train), func = operator.add))
+    test_acc = list(accumulate(map(len, test), func = operator.add))
+    train_set = set(zip([0,*train_acc], train_acc))
+    test_set = set(zip([0,*test_acc], test_acc))
+    correct = len(train_set & test_set)
+    pre = correct/len(test)
+    re = correct/len(test)
+    f1 = (2*pre*re)/(pre+re)
+    return f1
+
+def evaluation(x_true,x_pred):
+    
+    if type(x_true) != list:
+        x_true = [x_true]
+    elif len(x_true) > 1: # 2D to 1D
+        x_true_1d = [j for sub in x_true for j in sub]
+
+    if type(x_pred) != list:
+        x_pred = [x_pred]
+    elif len(x_pred) > 1: # 2D to 1D
+        x_pred_1d = [j for sub in x_pred for j in sub]
+    
+    _,y_true_boolean = prepro.preprocess_attacut(x_true_1d)
+    _,y_pred_boolean = prepro.preprocess_attacut(x_pred_1d)
+    char_score = char_eval_function(y_true_boolean,y_pred_boolean)
+
+    word_score = word_eval_function(x_true_1d[0].split('|'),x_pred_1d[0].split('|'))
+
+    return char_score,word_score
+
+    
