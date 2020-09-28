@@ -60,7 +60,7 @@ You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/mas
   [['สวัสดี', 'ประเทศ', 'ไทย'], ['ลุง', 'ตู่', 'สู้', 'ๆ']]
   ```
 ## Performance
-- .........
+- 
 
 ## How to re-train?
 - .....
