@@ -13,28 +13,49 @@ DeepCut version (for AttaCut version [here](.........))
 - pyahocorasick == 1.4.0
 
 ## Example
-### Engine Mode
+You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebook)
+### Load Engine & Engine Mode
 - ws1000
-  - Example 
+  - XXXXXXXXXXXXXX
   ```
-  XXXXXXXXXXXXX
+  SEFR_CUT.load_model(engine='ws1000')
   ```
-- ws1000
-  - Example 
+- tnhc
+  - XXXXXXXXXXXXXX
   ```
-  XXXXXXXXXXXXX
+  SEFR_CUT.load_model(engine='tnhc')
   ```
-- ws1000
-  - Example 
+- tl-deepcut-XXXX
+  - XXXXXXXXXXXXXX
   ```
-  XXXXXXXXXXXXX
+  SEFR_CUT.load_model(engine='tl-deepcut-xxxx')
   ```
-- ws1000
-  - Example 
+- deepcut
+  - XXXXXXXXXXXXXX
   ```
-  XXXXXXXXXXXXX
+  SEFR_CUT.load_model(engine='deepcut')
   ```
-
+### Segment Example
+- Segment with default k
+  ```
+  SEFR_CUT.load_model(engine='ws1000')
+  print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ']))
+  print(sefr_cut.tokenize(['สวัสดีประเทศไทย']))
+  print(sefr_cut.tokenize('สวัสดีประเทศไทย'))
+  
+  [['สวัสดี', 'ประเทศ', 'ไทย'], ['ลุง', 'ตู่', 'สู้', 'ๆ']]
+  [['สวัสดี', 'ประเทศ', 'ไทย']]
+  [['สวัสดี', 'ประเทศ', 'ไทย']]
+  ```
+- Segment with different k
+  ```
+  SEFR_CUT.load_model(engine='ws1000')
+  print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ'],k=5)) # refine only 5% of character number
+  print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ'],k=100)) # refine 100% of character number
+  
+  [['สวัสดี', 'ประเทศไทย'], ['ลุงตู่', 'สู้', 'ๆ']]
+  [['สวัสดี', 'ประเทศ', 'ไทย'], ['ลุง', 'ตู่', 'สู้', 'ๆ']]
+  ```
 ## Performance
 - .........
 
