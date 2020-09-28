@@ -1,6 +1,6 @@
 # SEFR CUT
-Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble
-DeepCut version (for AttaCut version [here](.........))
+Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble <br>
+CRF as Stacked Model and DeepCut as Baseline model<br>
 
 ## Install
 
@@ -13,25 +13,28 @@ DeepCut version (for AttaCut version [here](.........))
 - pyahocorasick == 1.4.0
 
 ## Example
-You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebook)
+You can play on [Notebooks folder](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebook) 
 ### Load Engine & Engine Mode
-- ws1000
-  - XXXXXXXXXXXXXX
+- ws1000, tnhc
+  - ws1000: Model trained on Wisesight-1000 and test on Wisesight-160
+  - tnhc: Model trained on TNHC (80:20 train&test split with random seed 42)
+  - BEST: Trained on BEST-2010 Corpus (NECTEC)
   ```
   SEFR_CUT.load_model(engine='ws1000')
-  ```
-- tnhc
-  - XXXXXXXXXXXXXX
-  ```
+  # OR
   SEFR_CUT.load_model(engine='tnhc')
+  # OR
+  SEFR_CUT.load_model(engine='best')
   ```
 - tl-deepcut-XXXX
-  - XXXXXXXXXXXXXX
+  - We also provide transfer learning of deepcut on 'Wisesight' as tl-deepcut-ws1000 and 'TNHC' as tl-deepcut-tnhc
   ```
-  SEFR_CUT.load_model(engine='tl-deepcut-xxxx')
+  SEFR_CUT.load_model(engine='tl-deepcut-ws1000')
+  # OR
+  SEFR_CUT.load_model(engine='tl-deepcut-tnhc')
   ```
 - deepcut
-  - XXXXXXXXXXXXXX
+  - We also provide the original deepcut
   ```
   SEFR_CUT.load_model(engine='deepcut')
   ```
