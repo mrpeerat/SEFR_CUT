@@ -1,1 +1,5 @@
-Example of DG-DS model
+# Example of DG-DS model
+
+# To Re-Train model please go to [File#2](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/2.Train_DS_model.ipynb)
+
+# To Apply your model with Filter-and-Refine please go to [File#3](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/3.Stacked%20Model%20Example.ipynb)
