@@ -93,7 +93,7 @@ You can play the example on [SEFR Example notebook](https://github.com/mrpeerat/
 ## Performance
 <img src="https://user-images.githubusercontent.com/21156980/94525454-4d2e6680-025e-11eb-929f-7bcbb76e92fd.PNG" width="600" height="386" />
 <img src="https://user-images.githubusercontent.com/21156980/94525459-4e5f9380-025e-11eb-9ce6-fd1598b902eb.PNG" width="600" height="386" />
-<img src="https://user-images.githubusercontent.com/21156980/94404126-ae8c0200-0198-11eb-9151-6adad36cfa31.PNG" width="600" height="359" />
+<img src="https://user-images.githubusercontent.com/21156980/94525741-b9a96580-025e-11eb-81f1-1016e59e25cf.PNG" width="600" height="306" />
 
 ## How to re-train?
 - You can re-train model in folder [Notebooks](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebooks) We provided everything for you!!
