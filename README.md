@@ -1,4 +1,4 @@
-# SEFR CUT
+# SEFR CUT (Stacked Ensemble Filter and Refine for Word Segmentation) 
 Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble (EMNLP 2020) <br>
 CRF as Stacked Model and DeepCut as Baseline model<br>
 
