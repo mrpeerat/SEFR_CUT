@@ -27,7 +27,7 @@ setup(
     long_description = readme,
     long_description_content_type='text/markdown',
     license = 'MIT',
-    description = '',
+    description = 'Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble (EMNLP2020)',
     author = 'mrpeerat',
     author_email = 'peerat.l_s19@vistec.ac.th',
     url = 'https://github.com/mrpeerat/SEFR_CUT',
