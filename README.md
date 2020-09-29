@@ -17,35 +17,35 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
 
 ## Example
 - Example files are on [SEFR Example notebook](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/1.SEFR_CUT%20example.ipynb)
-- [Try it on Colab]()
+- [Try it on Colab](https://colab.research.google.com/drive/1xA2rzYVnVWwxy6oFkISiG63x-5u1gwa1?usp=sharing)
 ### Load Engine & Engine Mode
 - ws1000, tnhc
   - ws1000: Model trained on Wisesight-1000 and test on Wisesight-160
   - tnhc: Model trained on TNHC (80:20 train&test split with random seed 42)
   - BEST: Trained on BEST-2010 Corpus (NECTEC)
   ```
-  SEFR_CUT.load_model(engine='ws1000')
+  sefr_cut.load_model(engine='ws1000')
   # OR
-  SEFR_CUT.load_model(engine='tnhc')
+  sefr_cut.load_model(engine='tnhc')
   # OR
-  SEFR_CUT.load_model(engine='best')
+  sefr_cut.load_model(engine='best')
   ```
 - tl-deepcut-XXXX
   - We also provide transfer learning of deepcut on 'Wisesight' as tl-deepcut-ws1000 and 'TNHC' as tl-deepcut-tnhc
   ```
-  SEFR_CUT.load_model(engine='tl-deepcut-ws1000')
+  sefr_cut.load_model(engine='tl-deepcut-ws1000')
   # OR
-  SEFR_CUT.load_model(engine='tl-deepcut-tnhc')
+  sefr_cut.load_model(engine='tl-deepcut-tnhc')
   ```
 - deepcut
   - We also provide the original deepcut
   ```
-  SEFR_CUT.load_model(engine='deepcut')
+  sefr_cut.load_model(engine='deepcut')
   ```
 ### Segment Example
 - Segment with default k
   ```
-  SEFR_CUT.load_model(engine='ws1000')
+  sefr_cut.load_model(engine='ws1000')
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ']))
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย']))
   print(sefr_cut.tokenize('สวัสดีประเทศไทย'))
@@ -56,7 +56,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
   ```
 - Segment with different k
   ```
-  SEFR_CUT.load_model(engine='ws1000')
+  sefr_cut.load_model(engine='ws1000')
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ'],k=5)) # refine only 5% of character number
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ'],k=100)) # refine 100% of character number
   
