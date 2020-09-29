@@ -123,11 +123,8 @@ def predict(sent,k):
             entropy_index = [return_max_index(k,value) for value in y_entropy] # Find entropy index from DC Baseline
             answer_ds_original = scoring_function(sent,y_pred,y_entropy,y_prob,entropy_index) # Score function
             x_answer = cut(answer_ds_original,sent)
-    answer = x_answer[0].split('|')
-    if answer[0] == '':
-        return answer[1:]
-    else:
-        return answer
+    answer = [(x.split('|') if x.split('|')[0] != '' else x.split('|')[1:]) for x in x_answer]
+    return answer
 
 def tokenize(sent,k=0):
     '''
@@ -151,39 +148,51 @@ def tokenize(sent,k=0):
     return list(ans)[0]
 
 def char_eval_function(y_true,y_pred): 
-    f1_score_entropy=[]
-    for index,_ in enumerate(y_pred):
-        _, _, fscore, _ = precision_recall_fscore_support(y_true[index], y_pred[index], average='binary')
-        f1_score_entropy.append(fscore)
-    return f1_score_entropy 
+    _, _, fscore, _ = precision_recall_fscore_support(y_true, y_pred, average='binary')
+    return fscore 
 
-def word_eval_function(train : list, test: list) -> tuple:
+def word_eval_function(train : list, test: list) -> tuple: #code from P'tle, Thank you. 
     train_acc = list(accumulate(map(len, train), func = operator.add))
     test_acc = list(accumulate(map(len, test), func = operator.add))
     train_set = set(zip([0,*train_acc], train_acc))
     test_set = set(zip([0,*test_acc], test_acc))
     correct = len(train_set & test_set)
-    pre = correct/len(test)
+    pre = correct/len(train)
     re = correct/len(test)
-    f1 = (2*pre*re)/(pre+re)
+    try:
+        f1 = (2*pre*re)/(pre+re)
+    except ZeroDivisionError as error:
+        f1 = 0
     return f1
 
 def evaluation(x_true,x_pred):
     
     if type(x_true) != list:
-        x_true = [x_true]
+        x_true_1d = [x_true]
     elif len(x_true) > 1: # 2D to 1D
-        x_true_1d = [j for sub in x_true for j in sub]
+        x_true_1d = ''
+        for sentence in x_true:
+            x_true_1d+=sentence[0]
+        x_true_1d = [x_true_1d]
+    else:
+        x_true_1d = x_true
 
     if type(x_pred) != list:
-        x_pred = [x_pred]
+        x_pred_1d = [x_pred]
     elif len(x_pred) > 1: # 2D to 1D
-        x_pred_1d = [j for sub in x_pred for j in sub]
+        x_pred_1d = ''
+        for sentence in x_pred:
+            x_pred_1d+=sentence[0]
+        x_pred_1d = [x_pred_1d]
+    else:
+        x_pred_1d = x_pred
+        
+    #print(f'True:{x_true_1d}\nPred:{x_pred_1d}')
     
     _,y_true_boolean = prepro.preprocess_attacut(x_true_1d)
     _,y_pred_boolean = prepro.preprocess_attacut(x_pred_1d)
-    char_score = char_eval_function(y_true_boolean,y_pred_boolean)
-
+    char_score = char_eval_function(y_true_boolean[0],y_pred_boolean[0])
+    
     word_score = word_eval_function(x_true_1d[0].split('|'),x_pred_1d[0].split('|'))
 
     return char_score,word_score

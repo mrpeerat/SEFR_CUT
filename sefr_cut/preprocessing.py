@@ -118,7 +118,7 @@ class preprocess:
     def preprocess_x_y(self,test_list):
         context = []
         for folder in test_list:
-            for filename in Path('corpus/'+folder).rglob('*.txt'):
+            for filename in Path(folder).rglob('*.txt'):
                 context.append(self.read_file(filename))
         x,y = list(zip(*context))
         return x,y
