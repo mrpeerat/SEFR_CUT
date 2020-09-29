@@ -64,10 +64,30 @@ You can play the example on [SEFR Example notebook](https://github.com/mrpeerat/
   ```
 
 ## Evaluation
-- Character & Word Evaluation is provided by call fuction ```evaluation()```
+- Character & Word Evaluation is provided by call fuction ```evaluation()``` 
   - For example
   ```
+  answer = 'สวัสดี|ประเทศไทย'
+  pred = 'สวัสดี|ประเทศ|ไทย'
+  char_score,word_score = sefr_cut.evaluation(answer,pred)
+  print(f'Word Score: {word_score} Char Score: {char_score}')
+
+  Word Score: 0.4 Char Score: 0.8
   
+  answer = ['สวัสดี|ประเทศไทย']
+  pred = ['สวัสดี|ประเทศ|ไทย']
+  char_score,word_score = sefr_cut.evaluation(answer,pred)
+  print(f'Word Score: {word_score} Char Score: {char_score}')
+
+  Word Score: 0.4 Char Score: 0.8
+  
+  
+  answer = [['สวัสดี|'],['ประเทศไทย']]
+  pred = [['สวัสดี|'],['ประเทศ|ไทย']]
+  char_score,word_score = sefr_cut.evaluation(answer,pred)
+  print(f'Word Score: {word_score} Char Score: {char_score}')
+  
+  Word Score: 0.4 Char Score: 0.8
   ```
 
 ## Performance
@@ -78,13 +98,23 @@ You can play the example on [SEFR Example notebook](https://github.com/mrpeerat/
 ## How to re-train?
 - You can re-train model in folder [Notebooks](https://github.com/mrpeerat/SEFR_CUT/tree/master/Notebooks) We provided everything for you!!
   ### Re-train Model
-  - You need to XXXXXXXXXXX
+  - You can run the notebook file #2, the corpus inside 'Notebooks/corpus/' is Wisesight-1000, you can try with BEST, TNHC, and LST20 !
+  - Rename variable name ```CRF_model_name``` 
   - Link:[HERE](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/2.Train_DS_model.ipynb)
   ### Filter and Refine Example
-  - You need to XXXXXXXXXXX
+  - Set variable name ```CRF_model_name``` same as File#2 
+  - If you want to know why we use filter-and-refine you can try to uncomment 3 lines in ```score_()``` function
+  ```
+  #answer = scoring_function(y_true,cp.deepcopy(y_pred),entropy_index_og)
+  #f1_hypothesis.append(eval_function(y_true,answer))
+  #ax.plot(range(start,K_num,step),f1_hypothesis,c="r",marker='o',label='Best case')
+  ```
   - Link:[HERE](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/3.Stacked%20Model%20Example.ipynb)
   ### Use your own model?
-  - You need to XXXXXXXXXXX
+  - Just move your model inside 'Notebooks/model/' to 'seft_cut/model/' and call model in one line.
+  ```
+  SEFR_CUT.load_model(engine='my_model')
+  ```
 
 ## Citation
 - Wait our paper shown in ACL Anthology
