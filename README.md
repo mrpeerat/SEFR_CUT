@@ -16,7 +16,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
 - pyahocorasick == 1.4.0
 
 ## Example
-- You can play seft_cut more on [SEFR Example notebook](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/1.SEFR_CUT%20example.ipynb)
+- Example files are on [SEFR Example notebook](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/1.SEFR_CUT%20example.ipynb)
 - [Try it on Colab]()
 ### Load Engine & Engine Mode
 - ws1000, tnhc
