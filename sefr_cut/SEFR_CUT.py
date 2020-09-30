@@ -141,7 +141,7 @@ def tokenize(sent,k=0):
             k =  5
         elif engine_mode == 'tnhc':
             k =  36
-        else: #ws
+        else: #ws and other
             k = 100 
     
     ans = map(predict,[sent],np.full(np.array(sent).shape, k))
@@ -165,29 +165,21 @@ def word_eval_function(train : list, test: list) -> tuple: #code from P'tle, Tha
         f1 = 0
     return f1
 
-def evaluation(x_true,x_pred):
+def evaluation(x_true,x_pred,sep=''):
     
     if type(x_true) != list:
         x_true_1d = [x_true]
     elif len(x_true) > 1: # 2D to 1D
-        x_true_1d = ''
-        for sentence in x_true:
-            x_true_1d+=sentence[0]
-        x_true_1d = [x_true_1d]
+        x_true_1d = [f'{sep}'.join([j for sub in x_true for j in sub])]
     else:
         x_true_1d = x_true
 
     if type(x_pred) != list:
         x_pred_1d = [x_pred]
     elif len(x_pred) > 1: # 2D to 1D
-        x_pred_1d = ''
-        for sentence in x_pred:
-            x_pred_1d+=sentence[0]
-        x_pred_1d = [x_pred_1d]
+        x_pred_1d = [f'{sep}'.join([j for sub in x_pred for j in sub])]
     else:
         x_pred_1d = x_pred
-        
-    #print(f'True:{x_true_1d}\nPred:{x_pred_1d}')
     
     _,y_true_boolean = prepro.preprocess_attacut(x_true_1d)
     _,y_pred_boolean = prepro.preprocess_attacut(x_pred_1d)

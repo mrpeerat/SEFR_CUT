@@ -58,7 +58,7 @@ class preprocess:
     ]
     CHAR_TYPES_MAP = {v: k for k, v in enumerate(CHAR_TYPES)}
 
-    def read_file(self,path):
+    def read_file(self,path): 
         words_all = []
         try:
             text = open(path,encoding='utf-8').readlines()
@@ -71,7 +71,7 @@ class preprocess:
             words_all.append(line)
         return self.preprocess_attacut(words_all)
 
-    def preprocess_attacut(self,sentence_lines):
+    def preprocess_attacut(self,sentence_lines): # change gold text -> raw text, y_boolean
         x = []
         y = []
         for sentence in sentence_lines:
@@ -91,7 +91,15 @@ class preprocess:
         
         return x,y
     
-    def create_feature_array(self,text, n_pad=21):
+    def preprocess_x_y(self,test_list):
+        context = []
+        for folder in test_list:
+            for filename in Path(folder).rglob('*.txt'):
+                context.append(self.read_file(filename))
+        x,y = list(zip(*context))
+        return x,y
+    
+    def create_feature_array(self,text, n_pad=21): # From DeepCut
         """
         Create feature array of character and surrounding characters
         """
@@ -115,14 +123,6 @@ class preprocess:
     def argmax_function(self,y):
         return [np.argmax(pred) for pred in y]
 
-    def preprocess_x_y(self,test_list):
-        context = []
-        for folder in test_list:
-            for filename in Path(folder).rglob('*.txt'):
-                context.append(self.read_file(filename))
-        x,y = list(zip(*context))
-        return x,y
-
     def pred(self,data):
         preds = deepcut.tokenize(data)
         return preds
@@ -132,17 +132,8 @@ class preprocess:
 
     def find_entropy(self,data_list):
         return [entropy(value,base=None) for value in data_list]
-
-    def preprocessing_y_pred(self,y_pred):
-        y_pred_ = []
-        for sentence in y_pred:
-            y_sentence = []
-            for char_ in sentence:
-                y_sentence.append([1-char_[0],char_[0]])
-            y_pred_.append(y_sentence)
-        return y_pred_
     
-    def preprocessing_original(self,y_pred):
+    def preprocessing_original(self,y_pred): # preprocess deepcut 
         y_pred_ = []
         for sentence in y_pred:
             y_sentence = []
@@ -153,13 +144,19 @@ class preprocess:
                     print(char_)
             y_pred_.append(y_sentence)
         return y_pred_
+    
+    def preprocessing_y_pred(self,y_pred): # preprocess transfer learning 
+        y_pred_ = []
+        for sentence in y_pred:
+            y_sentence = []
+            for char_ in sentence:
+                y_sentence.append([1-char_[0],char_[0]]) # logistic score -> softamax score
+            y_pred_.append(y_sentence)
+        return y_pred_
 
-    def change_to_entropy(self,normalizae_data,random=False):
-        if random:
-            y_entropy = map(self.random_entropy,normalizae_data)  
-        else:
-            y_entropy = map(self.find_entropy,normalizae_data) #Random = False
-        return list(y_entropy)
+    def change_to_entropy(self,normalizae_data):
+        y_entropy = list(map(self.find_entropy,normalizae_data))
+        return y_entropy
 
     def predict_(self,x):
         x_char,x_type = self.create_feature_array(x)
@@ -174,6 +171,5 @@ class preprocess:
         y_entropy_original = self.change_to_entropy(y_norm_original)
         y_original = list(map(self.argmax_function,y_original_prepro))
 
-        #return y_original,y_entropy_original,y_original_prob,y_pred,y_entropy,y_ws,y_entropy_ws 
         return y_original,y_entropy_original,y_original_prob
         ############################################
