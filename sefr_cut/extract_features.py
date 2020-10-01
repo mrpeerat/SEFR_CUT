@@ -89,7 +89,7 @@ def get_ctype(c):
             return tag[0]
     return 'x'
 
-def extract_features_crf(doc,idx,y_entropy_var,y_prob_var):
+def extract_features_crf(doc,y_entropy_var,y_prob_var):
     doc_features = []
     
     # Get (start, end) candidates from dictionary
@@ -105,8 +105,8 @@ def extract_features_crf(doc,idx,y_entropy_var,y_prob_var):
         char_features = {
             "bias":'b',
             'char': char,
-            'entropy' : y_entropy_var[idx][i],
-            'prob' : y_prob_var[idx][i][1],
+            'entropy' : y_entropy_var[i],
+            'prob' : y_prob_var[i][1],
         }
   
         if i == 0:

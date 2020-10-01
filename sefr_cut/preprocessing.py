@@ -63,8 +63,6 @@ class preprocess:
         try:
             text = open(path,encoding='utf-8').readlines()
         except:
-#             with open(path, 'rb') as f:
-#                 text = f.readlines()
             raise Exception(f'Error file {path}')  
         for line in text:
             line = reduce(lambda a, kv: a.replace(*kv), self.repls.items(), line)
@@ -96,7 +94,7 @@ class preprocess:
         for folder in test_list:
             for filename in Path(folder).rglob('*.txt'):
                 context.append(self.read_file(filename))
-        x,y = list(zip(*context))
+        x,y = [*zip(*context)]
         return x,y
     
     def create_feature_array(self,text, n_pad=21): # From DeepCut
@@ -141,7 +139,7 @@ class preprocess:
                 try:
                     y_sentence.append([1-char_[1],char_[1]])
                 except:
-                    print(char_)
+                    raise Exception('Error The answer not in form of {"Prob","Char"}')
             y_pred_.append(y_sentence)
         return y_pred_
     
@@ -155,7 +153,7 @@ class preprocess:
         return y_pred_
 
     def change_to_entropy(self,normalizae_data):
-        y_entropy = list(map(self.find_entropy,normalizae_data))
+        y_entropy = [*map(self.find_entropy,normalizae_data)]
         return y_entropy
 
     def predict_(self,x):
@@ -165,11 +163,11 @@ class preprocess:
         y_entropy_original=[]
         y_original_prob=[]
         
-        y_original_prob = list(map(self.pred,x))
+        y_original_prob = [*map(self.pred,x)]
         y_original_prepro = self.preprocessing_original(y_original_prob)
-        y_norm_original = list(map(self.normalization,y_original_prepro))
+        y_norm_original = [*map(self.normalization,y_original_prepro)]
         y_entropy_original = self.change_to_entropy(y_norm_original)
-        y_original = list(map(self.argmax_function,y_original_prepro))
+        y_original = [*map(self.argmax_function,y_original_prepro)]
 
         return y_original,y_entropy_original,y_original_prob
         ############################################

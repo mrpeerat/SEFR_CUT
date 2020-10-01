@@ -53,12 +53,12 @@ def return_max_index(number_ranking,entropy_list):
     index_entropy : list of character index sorted by ASC ex. [7,5,1,9,1] 
     '''
     index_entropy = []
-    func_entro_list = entropy_list[:]
-    ranking_ = int(len(entropy_list)*(number_ranking/100))
-    for _ in range(ranking_):
-        index, _ = max(enumerate(func_entro_list), key=operator.itemgetter(1))
-        func_entro_list[index] = -math.inf
-        index_entropy.append(index)
+    function_entropy = np.array(entropy_list)
+    ranking_times = int(len(entropy_list)*(number_ranking/100))
+    for _ in range(ranking_times):
+        index = np.where(function_entropy == np.amax(function_entropy))
+        function_entropy[index[0][0]] = -math.inf
+        index_entropy.append(index[0][0])
     return index_entropy
 
 def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,entropy_index):
@@ -77,7 +77,7 @@ def scoring_function(x_function,y_dg_pred,y_entropy_function,y_prob_function,ent
     del y_dg_pred
 
     for i,items in enumerate(entropy_index):
-        x_data = extract_features_crf(x_function[i],i,y_entropy_function,y_prob_function)
+        x_data = extract_features_crf(x_function[i],y_entropy_function[i],y_prob_function[i])
         for idx in items:
             y_pred_crf = model.tag(x_data[idx])
             result[i][idx] = int(y_pred_crf[0])
@@ -110,10 +110,10 @@ def predict(sent,k):
     answer : boolean list ex. [1,0,0,1,0,0]
     '''
     if 'tl-deepcut' in engine_mode:
-        y_pred=[]
+        y_pred =[]
         y_pred = [model.predict(prepro.create_feature_array(item)) for item in sent]
         y_pred_ = prepro.preprocessing_y_pred(y_pred)
-        y_pred = list(map(prepro.argmax_function,y_pred_))
+        y_pred = [*map(prepro.argmax_function,y_pred_)]
         x_answer = cut(y_pred,sent)
     else:
         y_pred,y_entropy,y_prob = prepro.predict_(sent) # DeepCut Baseline/BEST+WS/WS
@@ -145,15 +145,15 @@ def tokenize(sent,k=0):
             k = 100 
     
     ans = map(predict,[sent],np.full(np.array(sent).shape, k))
-    return list(ans)[0]
+    return [*ans][0]
 
 def char_eval_function(y_true,y_pred): 
     _, _, fscore, _ = precision_recall_fscore_support(y_true, y_pred, average='binary')
     return fscore 
 
 def word_eval_function(train : list, test: list) -> tuple: #code from P'tle, Thank you. 
-    train_acc = list(accumulate(map(len, train), func = operator.add))
-    test_acc = list(accumulate(map(len, test), func = operator.add))
+    train_acc = [*accumulate(map(len, train), func = operator.add)]
+    test_acc = [*accumulate(map(len, test), func = operator.add)]
     train_set = set(zip([0,*train_acc], train_acc))
     test_set = set(zip([0,*test_acc], test_acc))
     correct = len(train_set & test_set)
