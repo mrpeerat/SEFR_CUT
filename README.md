@@ -23,7 +23,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
   - ws1000: The model trained on Wisesight-1000 and test on Wisesight-160
   - tnhc: The model trained on TNHC (80:20 train&test split with random seed 42)
   - BEST: The model trained on BEST-2010 Corpus (NECTEC)
-  ```
+  ```python
   sefr_cut.load_model(engine='ws1000')
   # OR
   sefr_cut.load_model(engine='tnhc')
@@ -32,20 +32,20 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
   ```
 - tl-deepcut-XXXX
   - We also provide transfer learning of deepcut on 'Wisesight' as tl-deepcut-ws1000 and 'TNHC' as tl-deepcut-tnhc
-  ```
+  ```python
   sefr_cut.load_model(engine='tl-deepcut-ws1000')
   # OR
   sefr_cut.load_model(engine='tl-deepcut-tnhc')
   ```
 - deepcut
   - We also provide the original deepcut
-  ```
+  ```python
   sefr_cut.load_model(engine='deepcut')
   ```
 ### Segment Example
 You need to read the paper to understand why we have $k$ value!
 - Tokenize with default k-value
-  ```
+  ```python
   sefr_cut.load_model(engine='ws1000')
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ']))
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย']))
@@ -56,7 +56,7 @@ You need to read the paper to understand why we have $k$ value!
   [['สวัสดี', 'ประเทศ', 'ไทย']]
   ```
 - Tokenize with a various k-value
-  ```
+  ```python
   sefr_cut.load_model(engine='ws1000')
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ'],k=5)) # refine only 5% of character number
   print(sefr_cut.tokenize(['สวัสดีประเทศไทย','ลุงตู่สู้ๆ'],k=100)) # refine 100% of character number
@@ -68,7 +68,7 @@ You need to read the paper to understand why we have $k$ value!
 ## Evaluation
 - We also provide Character & Word Evaluation by call function ```evaluation()``` 
   - For example
-  ```
+  ```python
   answer = 'สวัสดี|ประเทศไทย'
   pred = 'สวัสดี|ประเทศ|ไทย'
   char_score,word_score = sefr_cut.evaluation(answer,pred)
@@ -114,7 +114,7 @@ You need to read the paper to understand why we have $k$ value!
   - Link:[HERE](https://github.com/mrpeerat/SEFR_CUT/blob/master/Notebooks/3.Stacked%20Model%20Example.ipynb)
   ### Use your trained model?
   - Just move your model inside 'Notebooks/model/' to 'seft_cut/model/' and call model in one line.
-  ```
+  ```python
   SEFR_CUT.load_model(engine='my_model')
   ```
 
