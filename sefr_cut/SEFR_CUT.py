@@ -151,7 +151,7 @@ def char_eval_function(y_true,y_pred):
     _, _, fscore, _ = precision_recall_fscore_support(y_true, y_pred, average='binary')
     return fscore 
 
-def word_eval_function(train : list, test: list) -> tuple: #code from P'tle, Thank you. 
+def word_eval_function(train : list, test: list) -> tuple: 
     train_acc = [*accumulate(map(len, train), func = operator.add)]
     test_acc = [*accumulate(map(len, test), func = operator.add)]
     train_set = set(zip([0,*train_acc], train_acc))
