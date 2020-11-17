@@ -15,9 +15,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
       Chuangsuwanich, Ekapol  and<br>
       Nutanong, Sarana",<br>
     booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",<br>
-    month = nov,<br>
     year = "2020",<br>
-    address = "Online",<br>
     publisher = "Association for Computational Linguistics",<br>
     url = "https://www.aclweb.org/anthology/2020.emnlp-main.315",<br>
 }
