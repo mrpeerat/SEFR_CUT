@@ -3,8 +3,24 @@ Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble (EMNLP
 CRF as Stacked Model and DeepCut as Baseline model<br>
 
 ## Read more:
-- Paper: [Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble]()
+- Paper: [Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble](https://www.aclweb.org/anthology/2020.emnlp-main.315/)
 - Blog: [Domain Adaptation กับตัวตัดคำ มันดีย์จริงๆ](https://medium.com/@pingloaf)
+
+## Citation
+@inproceedings{limkonchotiwat-etal-2020-domain,
+    title = "Domain Adaptation of {T}hai Word Segmentation Models using Stacked Ensemble",
+    author = "Limkonchotiwat, Peerat  and
+      Phatthiyaphaibun, Wannaphong  and
+      Sarwar, Raheem  and
+      Chuangsuwanich, Ekapol  and
+      Nutanong, Sarana",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-main.315",
+}
 
 ## Install
 > pip install sefr_cut
@@ -117,9 +133,6 @@ You need to read the paper to understand why we have $k$ value!
   ```python
   SEFR_CUT.load_model(engine='my_model')
   ```
-
-## Citation
-- Please wait for our paper shown in ACL Anthology
 
 Thank you many code from
 
