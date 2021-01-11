@@ -8,17 +8,17 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
 
 ## Citation
 ```
-@inproceedings{limkonchotiwat-etal-2020-domain,<br>
-    title = "Domain Adaptation of {T}hai Word Segmentation Models using Stacked Ensemble",<br>
-    author = "Limkonchotiwat, Peerat  and<br>
-      Phatthiyaphaibun, Wannaphong  and<br>
-      Sarwar, Raheem  and<br>
-      Chuangsuwanich, Ekapol  and<br>
-      Nutanong, Sarana",<br>
-    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",<br>
-    year = "2020",<br>
-    publisher = "Association for Computational Linguistics",<br>
-    url = "https://www.aclweb.org/anthology/2020.emnlp-main.315",<br>
+@inproceedings{limkonchotiwat-etal-2020-domain,
+    title = "Domain Adaptation of {T}hai Word Segmentation Models using Stacked Ensemble",
+    author = "Limkonchotiwat, Peerat  and
+      Phatthiyaphaibun, Wannaphong  and
+      Sarwar, Raheem  and
+      Chuangsuwanich, Ekapol  and
+      Nutanong, Sarana",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    year = "2020",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-main.315",
 }
 ```
 
