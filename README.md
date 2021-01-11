@@ -7,6 +7,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
 - Blog: [Domain Adaptation กับตัวตัดคำ มันดีย์จริงๆ](https://medium.com/@pingloaf)
 
 ## Citation
+```
 @inproceedings{limkonchotiwat-etal-2020-domain,<br>
     title = "Domain Adaptation of {T}hai Word Segmentation Models using Stacked Ensemble",<br>
     author = "Limkonchotiwat, Peerat  and<br>
@@ -19,6 +20,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
     publisher = "Association for Computational Linguistics",<br>
     url = "https://www.aclweb.org/anthology/2020.emnlp-main.315",<br>
 }
+```
 
 ## Install
 > pip install sefr_cut
