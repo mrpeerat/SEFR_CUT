@@ -6,7 +6,7 @@ Thai word Segmentation using Convolutional Neural Network
 from setuptools import setup
 
 requirements = [
-    'tensorflow>=2.0.0',
+    'tensorflow',
     'pandas',
     'scipy',
     'numpy',
