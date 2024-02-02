@@ -4,7 +4,7 @@ CRF as Stacked Model and DeepCut as Baseline model<br>
 
 ## Read more:
 - Paper: [Domain Adaptation of Thai Word Segmentation Models using Stacked Ensemble](https://www.aclweb.org/anthology/2020.emnlp-main.315/)
-- Blog: [Domain Adaptation กับตัวตัดคำ มันดีย์จริงๆ](https://medium.com/@pingloaf)
+- Blog: [ตัดคำภาษาไทยและภาษาอื่นไปถึงไหนกันแล้ว?](https://mrpeerat.medium.com/7365e9b5701a)
 - New verision (ACL2021): [OSKut (Out-of-domain StacKed cut for Word Segmentation)](https://github.com/mrpeerat/OSKut)
 
 ## Citation
